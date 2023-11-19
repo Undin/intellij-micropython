@@ -39,7 +39,8 @@ jobs:
       # For example, for build number `1234` and platform version `232` produces `1234-2023.2-SNAPSHOT`
       - name: Calculate version
         run: |
-          echo "ORG_GRADLE_PROJECT_version=${{ github.run_number }}-20${'${{ matrix.platform-version }}':0:-1}.${'${{ matrix.platform-version }}': -1}-SNAPSHOT" >> $GITHUB_ENV
+          platform_version = "${{ matrix.platform-version }}"
+          echo "ORG_GRADLE_PROJECT_version=${{ github.run_number }}-20${platform_version:0:-1}.${'platform_version: -1}-SNAPSHOT" >> $GITHUB_ENV
 
       - name: Build plugin
         uses: gradle/gradle-build-action@v2
